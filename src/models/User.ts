@@ -2,16 +2,19 @@ import { Document, Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 export interface IUser extends Document {
-    name?: string,
+    username?: string,
     password: string,
     email?: string,
     roles?: string,
     nik?: string,
+    name?: string,
+    jenis_kelamin?: string,
+    alamat?: string,
     validaSenha(password: string): Promise<boolean>
 }
 
 const UserSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true,
     },
@@ -29,7 +32,19 @@ const UserSchema = new Schema({
     },
     nik: {
         type: String,
-        required: true,
+        required: false,
+    },
+    name: {
+        type: String,
+        required: false,
+    },
+    jenis_kelamin: {
+        type: String,
+        required: false,
+    },
+    alamat: {
+        type: String,
+        required: false,
     },
     createdAt:{
         type: Date,
@@ -44,7 +59,7 @@ UserSchema.pre<IUser>("save", async function (next) {
     return next();
 })
 
-//Outra forma de criptografar a senha
+
 UserSchema.methods.encryptaSenha = async (password: string): Promise<string> => {
    const salt = await bcrypt.genSalt(10)
    return bcrypt.hash(password, salt)

@@ -47,11 +47,10 @@ export default {
                   .json({ msg: "Roles tidak ada" });
             }
             const newuser = new User({
-                name: req.body.name,
+                username: req.body.username,
                 password: req.body.password,
                 email: req.body.email,
                 roles: req.body.roles,
-                nik: req.body.nik,
             })
             console.log(user)
             const createUser = await newuser.save()
@@ -60,6 +59,19 @@ export default {
         } catch (e) {
             console.log(e)
             return res.status(400).json({ msg: `Signup Failed`, error: e })
+        }
+    },
+    async updateUser(req: Request, res: Response) {
+        try {
+            const user = await User.findOne({ id: req.params.id });
+            if (!user) {
+                return res.status(400).json({ msg: "User tidak Ada" });
+            }
+            const updateuser = await User.updateOne({ id: req.params.id }, req.body)
+            return res.status(200).json({ msg: `Success Update`, user: updateuser});
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json({ msg: `Update User Failed`, error: e })
         }
     },
 
