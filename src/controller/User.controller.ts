@@ -47,7 +47,8 @@ export default {
                   .json({ msg: "Roles tidak ada" });
             }
             const newuser = new User({
-                username: req.body.username,
+                name: req.body.name,
+                nik: req.body.nik,
                 password: req.body.password,
                 email: req.body.email,
                 roles: req.body.roles,
