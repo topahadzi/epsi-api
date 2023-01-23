@@ -16,6 +16,7 @@ export default {
                 nik: req.body.nik,
             })
             const anak = await Anak.findOne({ nik: req.body.nik });
+            console.log(anak)
             if (anak) {
                 return res.status(400).json({ msg: "Anak Sudah Ada" });
             }
