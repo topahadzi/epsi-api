@@ -44,6 +44,14 @@ const UserSchema = new Schema({
     createdAt:{
         type: Date,
         default:Date.now,
+    },
+    anak: [{
+        type: Schema.Types.ObjectId,
+        ref: "Anak"
+    }],
+    posyandu: {
+        type: Schema.Types.ObjectId,
+        ref: "Posyandu",
     }
 });
 

@@ -8,6 +8,7 @@ requireDir('../models');
 
 
 const User = mongoose.model("User")
+const Posyandu = mongoose.model("Posyandu")
 
 export default {
     async signin(req: Request, res: Response) {
@@ -18,7 +19,6 @@ export default {
                   .json({ msg: "Please. Send your email and password" });
               }
             const user = await User.findOne({ email: req.body.email });
-            console.log(user)
             if (!await bcrypt.compare(req.body.password, user.password)) {
                 return res.status(200).json({ msg: `error logon`, error: 'Cannot found logon' })
             }
@@ -40,7 +40,6 @@ export default {
             if (user) {
                 return res.status(400).json({ msg: "User sudah Ada" });
             }
-            console.log(req.body.roles)
             if (req.body.roles != "orangtua" && req.body.roles != "kader") {
                 return res
                   .status(400)
@@ -53,7 +52,6 @@ export default {
                 email: req.body.email,
                 roles: req.body.roles,
             })
-            console.log(user)
             const createUser = await newuser.save()
             const token: string = gnt.generateJwt({ id: newuser.id })
             return res.header('auth-token', token).status(200).json({ msg: `Success Register`, user: createUser, access_token: token });
@@ -64,24 +62,37 @@ export default {
     },
     async updateUser(req: Request, res: Response) {
         try {
-            const user = await User.findOne({ id: req.params.id });
+            const user = await User.findById(req.params.id);
             if (!user) {
                 return res.status(400).json({ msg: "User tidak Ada" });
             }
-            const updateuser = await User.updateOne({ id: req.params.id }, req.body)
+            const updateuser = await User.findByIdAndUpdate(req.params.id, req.body)
+            if (req.body.posyandu){
+                await Posyandu.findByIdAndUpdate(req.body.posyandu, {
+                    $push: { user: req.params.id } 
+                })
+            }
             return res.status(200).json({ msg: `Success Update`, user: updateuser});
         } catch (e) {
             console.log(e)
             return res.status(400).json({ msg: `Update User Failed`, error: e })
         }
     },
-
-    async getAll(req: Request, res: Response) {
+    async getUserById(req: Request, res: Response) {
         try {
-            const createUser = await (await User.find()).length
-            return res.status(200).json({msg: `All Works`, SizeOfDataBase: `${createUser} Pessoas Cadastradas`})
+            console.log(req.params.id)
+            const user = await User.findById(req.params.id).populate("anak").populate("posyandu");
+            return res.status(200).json({msg: `Get User`, User: user})
         } catch (e) {
-            return res.status(400).json({ msg: `All Failed`, error: e })
+            return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
         }
     }
+    // async getAll(req: Request, res: Response) {
+    //     try {
+    //         const createUser = await (await User.find()).length
+    //         return res.status(200).json({msg: `All Works`, SizeOfDataBase: `${createUser} Pessoas Cadastradas`})
+    //     } catch (e) {
+    //         return res.status(400).json({ msg: `All Failed`, error: e })
+    //     }
+    // }
 }
