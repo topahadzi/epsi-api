@@ -52,6 +52,10 @@ const UserSchema = new Schema({
     posyandu: {
         type: Schema.Types.ObjectId,
         ref: "Posyandu",
+    },
+    verifikasi: {
+        type: Boolean,
+        default: false,
     }
 });
 

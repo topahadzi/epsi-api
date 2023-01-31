@@ -11,10 +11,12 @@ const routes = express.Router();
 //Get
 // routes.get("/all", passport.authenticate("jwt", { session: false }), UserController.getAll)
 routes.get("/api/user/:id", passport.authenticate("jwt", { session: false }), UserController.getUserById)
+routes.get("/api/anak/:id", passport.authenticate("jwt", { session: false }), AnakController.getAnakById)
 //Post
 routes.post("/api/signin", UserController.signin)
 routes.post("/api/signup", UserController.signup)
 routes.post("/api/user/update/:id", passport.authenticate("jwt", { session: false }), UserController.updateUser)
+routes.post("/api/anak/update/:id", passport.authenticate("jwt", { session: false }), AnakController.updateAnak)
 routes.post("/api/anak/create", passport.authenticate("jwt", { session: false }), AnakController.create)
 routes.post("/api/posyandu/create", passport.authenticate("jwt", { session: false }), PosyanduController.create)
 routes.get("/api/posyandu", passport.authenticate("jwt", { session: false }), PosyanduController.getAll)
