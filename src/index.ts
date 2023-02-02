@@ -7,8 +7,8 @@ import passport from 'passport'
 import passportMiddleware from './middlewares/passport';
 
 const requireDir = require('require-dir')
-const multer = require('multer')
-const upload = multer()
+// const multer = require('multer')
+// const upload = multer()
 const app: Express = express();
 const port = config.port;
 const dbConnection = config.DB.URI;
@@ -29,7 +29,7 @@ passport.use(passportMiddleware);
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(upload.array()) 
+app.use(express.urlencoded({ limit: '50000mb', extended: false }));
 app.use(routes)
 requireDir('./models')
 app.listen(port, () => {

@@ -33,5 +33,13 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
         }
-    }
+    },
+    async getPosyanduById(req: Request, res: Response) {
+        try {
+            const posyandu = await Posyandu.findById(req.params.id);
+            return res.status(200).json({msg: `Get Posyandu`, posyandu: posyandu})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get Posyandu By Id Failed`, error: e })
+        }
+    },
 }

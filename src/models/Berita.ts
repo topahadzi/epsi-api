@@ -15,7 +15,11 @@ const BeritaSchema = new Schema({
     },
     image: {
         type: String,
-    }
+    },
+    createdAt:{
+        type: Date,
+        default:Date.now,
+    },
 });
 const Berita = model<IBerita>("Berita", BeritaSchema);
 export default Berita;

@@ -11,8 +11,8 @@ const config_1 = __importDefault(require("./config/config"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = __importDefault(require("./middlewares/passport"));
 const requireDir = require('require-dir');
-const multer = require('multer');
-const upload = multer();
+// const multer = require('multer')
+// const upload = multer()
 const app = (0, express_1.default)();
 const port = config_1.default.port;
 const dbConnection = config_1.default.DB.URI;
@@ -32,7 +32,7 @@ passport_1.default.use(passport_2.default);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.raw());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.use(upload.array());
+app.use(express_1.default.urlencoded({ limit: '50000mb', extended: false }));
 app.use(routes_1.routes);
 requireDir('./models');
 app.listen(port, () => {

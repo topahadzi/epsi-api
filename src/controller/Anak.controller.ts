@@ -40,9 +40,10 @@ export default {
     async getAnakById(req: Request, res: Response) {
         try {
             const anak = await Anak.findById(req.params.id);
-            return res.status(200).json({msg: `Get Anak`, Anak: anak})
+            return res.status(200).json({msg: `Get Anak`, anak: anak})
         } catch (e) {
             return res.status(400).json({ msg: `Get Anak By Id Failed`, error: e })
         }
     }
+
 }

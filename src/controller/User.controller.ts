@@ -2,6 +2,10 @@ import { Request, Response } from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs';
 import gnt from '../validators/generateToken';
+import { uploadToS3 } from "../services/uploadToS3";
+import config from "../config/config";
+import { S3 } from 'aws-sdk';
+
 // import { IUser } from '../models/User';
 const requireDir = require('require-dir')
 requireDir('../models');
@@ -66,7 +70,20 @@ export default {
             if (!user) {
                 return res.status(400).json({ msg: "User tidak Ada" });
             }
+
+            if(req.file){
+                const s3 = new S3({
+                    accessKeyId: config.aws_access_key_id,
+                    secretAccessKey: config.aws_secret_access_key,
+                });
+                console.log("file stobject", req.file)
+                const uploadRes = await uploadToS3(s3, req.file);
+                await User.findByIdAndUpdate(req.params.id, {
+                    photo: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
+                })
+            }
             const updateuser = await User.findByIdAndUpdate(req.params.id, req.body)
+
             if (req.body.posyandu){
                 await Posyandu.findByIdAndUpdate(req.body.posyandu, {
                     $push: { user: req.params.id } 
@@ -82,7 +99,7 @@ export default {
         try {
             console.log(req.params.id)
             const user = await User.findById(req.params.id).populate("anak").populate("posyandu");
-            return res.status(200).json({msg: `Get User`, User: user})
+            return res.status(200).json({msg: `Get User`, user: user})
         } catch (e) {
             return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
         }
