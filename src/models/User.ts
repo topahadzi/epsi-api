@@ -56,6 +56,9 @@ const UserSchema = new Schema({
     verifikasi: {
         type: Boolean,
         default: false,
+    },
+    photo: {
+        type: String,
     }
 });
 
