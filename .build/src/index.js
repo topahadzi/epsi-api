@@ -10,6 +10,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const config_1 = __importDefault(require("./config/config"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = __importDefault(require("./middlewares/passport"));
+const cors_1 = __importDefault(require("cors"));
 const requireDir = require('require-dir');
 // const multer = require('multer')
 // const upload = multer()
@@ -32,6 +33,13 @@ passport_1.default.use(passport_2.default);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.raw());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use(cors_1.default);
+app.use(express_1.default.json());
+const allowedOrigins = ['*'];
+const options = {
+    origin: allowedOrigins
+};
+app.use((0, cors_1.default)(options));
 app.use(express_1.default.urlencoded({ limit: '50000mb', extended: false }));
 app.use(routes_1.routes);
 requireDir('./models');
