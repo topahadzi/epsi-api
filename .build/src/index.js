@@ -10,7 +10,6 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const config_1 = __importDefault(require("./config/config"));
 const passport_1 = __importDefault(require("passport"));
 const passport_2 = __importDefault(require("./middlewares/passport"));
-const cors_1 = __importDefault(require("cors"));
 const multer_1 = __importDefault(require("multer"));
 const requireDir = require('require-dir');
 const storage = multer_1.default.diskStorage({
@@ -42,11 +41,13 @@ passport_1.default.use(passport_2.default);
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.raw());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-const allowedOrigins = ['*'];
-const options = {
-    origin: allowedOrigins
-};
-app.use((0, cors_1.default)(options));
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
+    next();
+});
 app.use(upload.single('upload'));
 app.use(routes_1.routes);
 requireDir('./models');

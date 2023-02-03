@@ -1,11 +1,10 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose'
 import { routes } from './routes'
 import bodyParser from 'body-parser';
 import config from "./config/config";
 import passport from 'passport'
 import passportMiddleware from './middlewares/passport';
-import cors from 'cors';
 import multer from 'multer';
 
 
@@ -43,11 +42,14 @@ passport.use(passportMiddleware);
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(bodyParser.urlencoded({ extended: true }));
-const allowedOrigins = ['*'];
-const options: cors.CorsOptions = {
-  origin: allowedOrigins
-};
-app.use(cors(options));
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
+  next();
+});
 app.use(upload.single('upload'))
 app.use(routes)
 requireDir('./models')
