@@ -4,77 +4,84 @@ export interface IRapor extends Document {
 
 
 }
+const ImunisasiSchema = new Schema({
+    hepatitis_b: {
+        type: Boolean,
+        default: false,
+    },
+    polio: {
+        type: Boolean,
+        default: false,
+    },
+    bcg: {
+        type: Boolean,
+        default: false,
+    },
+    dtp: {
+        type: Boolean,
+        default: false,
+    },
+    hib: {
+        type: Boolean,
+        default: false,
+    },
+    pcv: {
+        type: Boolean,
+        default: false,
+    },
+    rotavirus: {
+        type: Boolean,
+        default: false,
+    },
+    influenza: {
+        type: Boolean,
+        default: false,
+    },
+    mr: {
+        type: Boolean,
+        default: false,
+    },
+    je: {
+        type: Boolean,
+        default: false,
+    },
+    varisela: {
+        type: Boolean,
+        default: false,
+    },
+    hepatitis_a: {
+        type: Boolean,
+        default: false,
+    },
+    tifoid: {
+        type: Boolean,
+        default: false,
+    },
+    dengue: {
+        type: Boolean,
+        default: false,
+    }
+})
 const RaporSchema = new Schema({
-    tinggi_badan: {
+    name: {
         type: String,
+        required: true
+    },
+    tinggi_badan: {
+        type: Number,
         required: true,
     },
     berat_badan: {
-        type: String,
+        type: Number,
         required: true,
     },
     umur: {
         type: String,
         required: true
     },
-    imunisasi: [ {
-        hepatitis_b: {
-            type: Boolean,
-            default: false,
-        },
-        polio: {
-            type: Boolean,
-            default: false,
-        },
-        bcg: {
-            type: Boolean,
-            default: false,
-        },
-        dtp: {
-            type: Boolean,
-            default: false,
-        },
-        hib: {
-            type: Boolean,
-            default: false,
-        },
-        pcv: {
-            type: Boolean,
-            default: false,
-        },
-        rotavirus: {
-            type: Boolean,
-            default: false,
-        },
-        influenza: {
-            type: Boolean,
-            default: false,
-        },
-        mr: {
-            type: Boolean,
-            default: false,
-        },
-        je: {
-            type: Boolean,
-            default: false,
-        },
-        varisela: {
-            type: Boolean,
-            default: false,
-        },
-        hepatitis_a: {
-            type: Boolean,
-            default: false,
-        },
-        tifoid: {
-            type: Boolean,
-            default: false,
-        },
-        dengue: {
-            type: Boolean,
-            default: false,
-        },
-    }],
+    imunisasi:{
+        default: [ImunisasiSchema]
+    },
     anak: [{
         type: Schema.Types.ObjectId,
         ref: "Anak"

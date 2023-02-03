@@ -10,6 +10,7 @@ const Anak_controller_1 = __importDefault(require("../controller/Anak.controller
 const Posyandu_controller_1 = __importDefault(require("../controller/Posyandu.controller"));
 const Berita_controller_1 = __importDefault(require("../controller/Berita.controller"));
 const passport_1 = __importDefault(require("passport"));
+const Rapor_controller_1 = __importDefault(require("../controller/Rapor.controller"));
 // import multer from 'multer';
 const routes = express_1.default.Router();
 exports.routes = routes;
@@ -39,5 +40,6 @@ routes.post("/api/anak/update/:id", passport_1.default.authenticate("jwt", { ses
 routes.post("/api/anak/create", passport_1.default.authenticate("jwt", { session: false }), Anak_controller_1.default.create);
 routes.post("/api/posyandu/create", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.create);
 routes.post("/api/berita/create", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.create);
+routes.post("/api/rapor/create", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.create);
 routes.post("/api/berita/update/:id", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.update);
 //# sourceMappingURL=index.js.map

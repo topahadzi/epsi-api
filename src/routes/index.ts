@@ -5,6 +5,7 @@ import AnakController from '../controller/Anak.controller';
 import PosyanduController from '../controller/Posyandu.controller';
 import BeritaController from '../controller/Berita.controller';
 import passport from "passport";
+import RaporController from '../controller/Rapor.controller';
 // import multer from 'multer';
 
 const routes = express.Router();
@@ -37,5 +38,6 @@ routes.post("/api/anak/update/:id", passport.authenticate("jwt", { session: fals
 routes.post("/api/anak/create", passport.authenticate("jwt", { session: false }), AnakController.create)
 routes.post("/api/posyandu/create", passport.authenticate("jwt", { session: false }), PosyanduController.create)
 routes.post("/api/berita/create", passport.authenticate("jwt", { session: false }), BeritaController.create)
+routes.post("/api/rapor/create", passport.authenticate("jwt", { session: false }), RaporController.create)
 routes.post("/api/berita/update/:id", passport.authenticate("jwt", { session: false }), BeritaController.update)
 export {routes};

@@ -23,6 +23,8 @@ exports.default = {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log(req.body);
+                console.log(req.file);
                 if (req.file) {
                     const s3 = new aws_sdk_1.S3({
                         accessKeyId: config_1.default.aws_access_key_id,
@@ -87,7 +89,7 @@ exports.default = {
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const berita = yield Berita.find();
+                const berita = yield Berita.find().sort({ createdAt: -1 });
                 ;
                 return res.status(200).json({ msg: `Get All Berita`, berita: berita });
             }

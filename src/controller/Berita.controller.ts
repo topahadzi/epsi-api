@@ -12,6 +12,8 @@ const Berita = mongoose.model("Berita")
 export default {
     async create(req: Request, res: Response) {
         try {
+            console.log(req.body)
+            console.log(req.file)
             if(req.file){
                 const s3 = new S3({
                     accessKeyId: config.aws_access_key_id,
@@ -66,7 +68,7 @@ export default {
     },
     async getAll(req: Request, res: Response) {
         try {
-            const berita = await Berita.find();;
+            const berita = await Berita.find().sort({createdAt: -1});;
             return res.status(200).json({msg: `Get All Berita`, berita: berita})
         } catch (e) {
             return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
