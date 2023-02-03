@@ -4,6 +4,7 @@ const requireDir = require('require-dir')
 requireDir('../models');
 
 const Posyandu = mongoose.model("Posyandu")
+const User = mongoose.model("User")
 
 
 export default {
@@ -42,4 +43,20 @@ export default {
             return res.status(400).json({ msg: `Get Posyandu By Id Failed`, error: e })
         }
     },
+    async getOrangtua(req: Request, res: Response) {
+        try {
+            const posyandu = await User.find({ posyandu: req.params.id, roles: "orangtua" });;
+            return res.status(200).json({msg: `Get list orang tua`, Posyandu: posyandu})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
+        }
+    },
+    async getKader(req: Request, res: Response) {
+        try {
+            const posyandu = await User.find({ posyandu: req.params.id, roles: "kader" });;
+            return res.status(200).json({msg: `Get list orang tua`, Posyandu: posyandu})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
+        }
+    }
 }

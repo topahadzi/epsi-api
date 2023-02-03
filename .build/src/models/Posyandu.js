@@ -13,10 +13,6 @@ const PosyanduSchema = new mongoose_1.Schema({
     gambar: {
         type: String,
     },
-    user: [{
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: "User"
-        }],
 });
 const Posyandu = (0, mongoose_1.model)("Posyandu", PosyanduSchema);
 exports.default = Posyandu;

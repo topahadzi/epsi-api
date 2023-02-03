@@ -16,10 +16,6 @@ const PosyanduSchema = new Schema({
     gambar: {
         type: String,
     },
-    user: [{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }],
 });
 const Posyandu = model<IPosyandu>("Posyandu", PosyanduSchema);
 export default Posyandu;

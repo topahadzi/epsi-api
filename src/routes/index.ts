@@ -24,6 +24,8 @@ routes.get("/api/user/:id", passport.authenticate("jwt", { session: false }), Us
 routes.get("/api/anak/:id", passport.authenticate("jwt", { session: false }), AnakController.getAnakById)
 routes.get("/api/berita/:id", passport.authenticate("jwt", { session: false }), BeritaController.getBeritaById)
 routes.get("/api/posyandu/:id", passport.authenticate("jwt", { session: false }), PosyanduController.getPosyanduById)
+routes.get("/api/posyandu/orangtua/:id", passport.authenticate("jwt", { session: false }), PosyanduController.getOrangtua)
+routes.get("/api/posyandu/kader/:id", passport.authenticate("jwt", { session: false }), PosyanduController.getKader)
 routes.get("/api/posyandu", passport.authenticate("jwt", { session: false }), PosyanduController.getAll)
 routes.get("/api/berita", passport.authenticate("jwt", { session: false }), BeritaController.getAll)
 
