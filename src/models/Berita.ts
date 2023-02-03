@@ -13,7 +13,7 @@ const BeritaSchema = new Schema({
         type: String,
         required: true,
     },
-    image: {
+    photo: {
         type: String,
     },
     createdAt:{

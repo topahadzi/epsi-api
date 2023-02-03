@@ -10,7 +10,7 @@ const BeritaSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    image: {
+    photo: {
         type: String,
     },
     createdAt: {
