@@ -10,14 +10,17 @@ const Anak_controller_1 = __importDefault(require("../controller/Anak.controller
 const Posyandu_controller_1 = __importDefault(require("../controller/Posyandu.controller"));
 const Berita_controller_1 = __importDefault(require("../controller/Berita.controller"));
 const passport_1 = __importDefault(require("passport"));
-const multer_1 = __importDefault(require("multer"));
+// import multer from 'multer';
 const routes = express_1.default.Router();
 exports.routes = routes;
-const upload = (0, multer_1.default)({
-    storage: multer_1.default.diskStorage({
-        destination: 'uploads/',
-    })
-});
+// const storage = multer.diskStorage({
+//     destination: "/tmp/uploads"
+//     // filename: function (req, file, cb) {
+//     //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//     //   cb(null, file.fieldname + '-' + uniqueSuffix)
+//     // }
+// })
+// const upload = multer({ storage: storage })
 //Get
 // routes.get("/all", passport.authenticate("jwt", { session: false }), UserController.getAll)
 routes.get("/api/user/:id", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.getUserById);
@@ -29,7 +32,7 @@ routes.get("/api/berita", passport_1.default.authenticate("jwt", { session: fals
 //Post
 routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);
-routes.post("/api/user/update/:id", passport_1.default.authenticate("jwt", { session: false }), upload.single('upload'), User_controller_1.default.updateUser);
+routes.post("/api/user/update/:id", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.updateUser);
 routes.post("/api/anak/update/:id", passport_1.default.authenticate("jwt", { session: false }), Anak_controller_1.default.updateAnak);
 routes.post("/api/anak/create", passport_1.default.authenticate("jwt", { session: false }), Anak_controller_1.default.create);
 routes.post("/api/posyandu/create", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.create);

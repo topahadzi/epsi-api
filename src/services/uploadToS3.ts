@@ -6,10 +6,12 @@ import config from "../config/config";
 export const uploadToS3 = async (s3: S3, fileData?: Express.Multer.File) => {
   try {
     const fileContent = fs.readFileSync(fileData!.path);
+    const extension = fileData!.mimetype.split('/')[1];
+    console.log(extension)
 
     const params = {
       Bucket: config.bucket_name,
-      Key: fileData!.originalname,
+      Key: Date.now() + "." + extension,
       Body: fileContent
     };
     

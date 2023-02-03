@@ -5,14 +5,18 @@ import AnakController from '../controller/Anak.controller';
 import PosyanduController from '../controller/Posyandu.controller';
 import BeritaController from '../controller/Berita.controller';
 import passport from "passport";
-import multer from "multer";
+// import multer from 'multer';
 
 const routes = express.Router();
-const upload = multer({
-    storage : multer.diskStorage({
-        destination: 'uploads/',
-      })
-});
+// const storage = multer.diskStorage({
+//     destination: "/tmp/uploads"
+//     // filename: function (req, file, cb) {
+//     //   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+//     //   cb(null, file.fieldname + '-' + uniqueSuffix)
+//     // }
+// })
+  
+// const upload = multer({ storage: storage })
 
 //Get
 // routes.get("/all", passport.authenticate("jwt", { session: false }), UserController.getAll)
@@ -26,7 +30,7 @@ routes.get("/api/berita", passport.authenticate("jwt", { session: false }), Beri
 //Post
 routes.post("/api/signin", UserController.signin)
 routes.post("/api/signup", UserController.signup)
-routes.post("/api/user/update/:id", passport.authenticate("jwt", { session: false }), upload.single('upload'), UserController.updateUser)
+routes.post("/api/user/update/:id", passport.authenticate("jwt", { session: false }), UserController.updateUser)
 routes.post("/api/anak/update/:id", passport.authenticate("jwt", { session: false }), AnakController.updateAnak)
 routes.post("/api/anak/create", passport.authenticate("jwt", { session: false }), AnakController.create)
 routes.post("/api/posyandu/create", passport.authenticate("jwt", { session: false }), PosyanduController.create)

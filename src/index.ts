@@ -6,12 +6,23 @@ import config from "./config/config";
 import passport from 'passport'
 import passportMiddleware from './middlewares/passport';
 import cors from 'cors';
-
+import multer from 'multer';
 
 
 const requireDir = require('require-dir')
-// const multer = require('multer')
-// const upload = multer()
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/tmp')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
+
+const upload = multer({ storage: storage })
+
 const app: Express = express();
 const port = config.port;
 const dbConnection = config.DB.URI;
@@ -32,15 +43,12 @@ passport.use(passportMiddleware);
 app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors);
-app.use(express.json());
 const allowedOrigins = ['*'];
-
 const options: cors.CorsOptions = {
   origin: allowedOrigins
 };
 app.use(cors(options));
-app.use(express.urlencoded({ limit: '50000mb', extended: false }));
+app.use(upload.single('upload'))
 app.use(routes)
 requireDir('./models')
 app.listen(port, () => {

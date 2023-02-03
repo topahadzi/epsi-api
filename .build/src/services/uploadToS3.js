@@ -18,9 +18,11 @@ const config_1 = __importDefault(require("../config/config"));
 const uploadToS3 = (s3, fileData) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const fileContent = fs_1.default.readFileSync(fileData.path);
+        const extension = fileData.mimetype.split('/')[1];
+        console.log(extension);
         const params = {
             Bucket: config_1.default.bucket_name,
-            Key: fileData.originalname,
+            Key: Date.now() + "." + extension,
             Body: fileContent
         };
         try {
