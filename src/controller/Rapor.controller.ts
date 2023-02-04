@@ -10,7 +10,7 @@ export default {
     async create(req: Request, res: Response) {
         try {
             const searchRapor = await Rapor.find({ name: req.body.name, anak: req.body.anak });
-            if (searchRapor) {
+            if (searchRapor.length != 0) {
                 return res.status(400).json({ msg: "Rapor Sudah Ada" });
             }
             const rapor = {

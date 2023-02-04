@@ -21,7 +21,8 @@ exports.default = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const searchRapor = yield Rapor.find({ name: req.body.name, anak: req.body.anak });
-                if (searchRapor) {
+                console.log(searchRapor);
+                if (searchRapor.length != 0) {
                     return res.status(400).json({ msg: "Rapor Sudah Ada" });
                 }
                 const rapor = Object.assign(Object.assign({}, req.body), { umur: "12", imunisasi: {
