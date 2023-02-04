@@ -45,7 +45,7 @@ export default {
     async getAll(req: Request, res: Response) {
         try {
             const posyandu = await Posyandu.find();
-            return res.status(200).json({msg: `Get Posyandu`, Posyandu: posyandu})
+            return res.status(200).json({msg: `Get Posyandu`, posyandu: posyandu})
         } catch (e) {
             return res.status(400).json({ msg: `Get Posyandu Fai    led`, error: e })
         }
@@ -61,7 +61,7 @@ export default {
     async getOrangtua(req: Request, res: Response) {
         try {
             const posyandu = await User.find({ posyandu: req.params.id, roles: "orangtua" });;
-            return res.status(200).json({msg: `Get list orang tua`, Posyandu: posyandu})
+            return res.status(200).json({msg: `Get list orang tua`, orangtua: posyandu})
         } catch (e) {
             return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
         }
@@ -69,7 +69,7 @@ export default {
     async getKader(req: Request, res: Response) {
         try {
             const posyandu = await User.find({ posyandu: req.params.id, roles: "kader" });;
-            return res.status(200).json({msg: `Get list orang tua`, Posyandu: posyandu})
+            return res.status(200).json({msg: `Get list orang tua`, kader: posyandu})
         } catch (e) {
             return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
         }
