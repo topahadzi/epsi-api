@@ -29,10 +29,10 @@ export default {
     },
     async getAll(req: Request, res: Response) {
         try {
-            const posyandu = await Posyandu.find().populate("user");;
+            const posyandu = await Posyandu.find();
             return res.status(200).json({msg: `Get Posyandu`, Posyandu: posyandu})
         } catch (e) {
-            return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
+            return res.status(400).json({ msg: `Get Posyandu Failed`, error: e })
         }
     },
     async getPosyanduById(req: Request, res: Response) {

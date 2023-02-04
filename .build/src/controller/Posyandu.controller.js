@@ -42,12 +42,11 @@ exports.default = {
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const posyandu = yield Posyandu.find().populate("user");
-                ;
+                const posyandu = yield Posyandu.find();
                 return res.status(200).json({ msg: `Get Posyandu`, Posyandu: posyandu });
             }
             catch (e) {
-                return res.status(400).json({ msg: `Get User By Id Failed`, error: e });
+                return res.status(400).json({ msg: `Get Posyandu Failed`, error: e });
             }
         });
     },
