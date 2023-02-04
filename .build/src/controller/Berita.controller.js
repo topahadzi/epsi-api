@@ -63,7 +63,7 @@ exports.default = {
                     console.log("file stobject", req.file);
                     const uploadRes = yield (0, uploadToS3_1.uploadToS3)(s3, req.file);
                     yield Berita.findByIdAndUpdate(req.params.id, {
-                        image: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
+                        photo: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
                     });
                 }
                 const update = yield Berita.findByIdAndUpdate(req.params.id, req.body);
