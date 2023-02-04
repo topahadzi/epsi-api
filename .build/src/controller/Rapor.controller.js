@@ -20,7 +20,22 @@ exports.default = {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const rapor = Object.assign(Object.assign({}, req.body), { umur: "12" });
+                const rapor = Object.assign(Object.assign({}, req.body), { umur: "12", imunisasi: {
+                        hepatitis_b: req.body.hepatitis_b,
+                        polio: req.body.polio,
+                        bcg: req.body.bcg,
+                        dtp: req.body.dtp,
+                        hib: req.body.hib,
+                        pcv: req.body.pcv,
+                        rotavirus: req.body.rotavirus,
+                        influenza: req.body.influenza,
+                        mr: req.body.mr,
+                        je: req.body.je,
+                        varisela: req.body.varisela,
+                        hepatitis_a: req.body.hepatitis_a,
+                        tifoid: req.body.tifoid,
+                        dengue: req.body.dengue
+                    } });
                 console.log(rapor);
                 const createRapor = yield Rapor.create(rapor);
                 return res.status(200).json({ msg: `Success Rapor`, rapor: createRapor });
