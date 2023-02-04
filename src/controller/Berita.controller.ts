@@ -73,5 +73,13 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
         }
+    },
+    async delete(req: Request, res: Response){
+        try {
+            const berita = await Berita.deleteOne({ _id: req.params.id});
+            return res.status(200).json({msg: `Delete Berita Success`, berita: berita})
+        } catch (e) {
+            return res.status(400).json({ msg: `Delete Berita Failed`, error: e })
+        }
     }
 }

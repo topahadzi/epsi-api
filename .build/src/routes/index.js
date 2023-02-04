@@ -42,4 +42,5 @@ routes.post("/api/posyandu/create", passport_1.default.authenticate("jwt", { ses
 routes.post("/api/berita/create", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.create);
 routes.post("/api/rapor/create", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.create);
 routes.post("/api/berita/update/:id", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.update);
+routes.delete("/api/berita/:id", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.delete);
 //# sourceMappingURL=index.js.map

@@ -40,4 +40,6 @@ routes.post("/api/posyandu/create", passport.authenticate("jwt", { session: fals
 routes.post("/api/berita/create", passport.authenticate("jwt", { session: false }), BeritaController.create)
 routes.post("/api/rapor/create", passport.authenticate("jwt", { session: false }), RaporController.create)
 routes.post("/api/berita/update/:id", passport.authenticate("jwt", { session: false }), BeritaController.update)
+
+routes.delete("/api/berita/:id", passport.authenticate("jwt", { session: false }), BeritaController.delete)
 export {routes};

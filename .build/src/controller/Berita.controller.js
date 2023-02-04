@@ -97,6 +97,17 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Berita All Failed`, error: e });
             }
         });
+    },
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const berita = yield Berita.deleteOne({ _id: req.params.id });
+                return res.status(200).json({ msg: `Delete Berita Success`, berita: berita });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Delete Berita Failed`, error: e });
+            }
+        });
     }
 };
 //# sourceMappingURL=Berita.controller.js.map
