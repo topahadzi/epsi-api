@@ -60,6 +60,17 @@ exports.default = {
             }
         });
     },
+    getRaporById(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const rapor = yield Rapor.findById(req.params.id);
+                return res.status(200).json({ msg: `Get Rapor By Id`, rapor: rapor });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get Rapor By Id Failed`, error: e });
+            }
+        });
+    },
     // async getAll(req: Request, res: Response) {
     //     try {
     //         const berita = await Berita.find().sort({createdAt: -1});;

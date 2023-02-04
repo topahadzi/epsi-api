@@ -30,6 +30,7 @@ routes.get("/api/posyandu/kader/:id", passport.authenticate("jwt", { session: fa
 routes.get("/api/posyandu", passport.authenticate("jwt", { session: false }), PosyanduController.getAll)
 routes.get("/api/berita", passport.authenticate("jwt", { session: false }), BeritaController.getAll)
 routes.get("/api/rapor/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporByAnakId)
+routes.get("/api/rapor/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporById)
 
 //Post
 routes.post("/api/signin", UserController.signin)

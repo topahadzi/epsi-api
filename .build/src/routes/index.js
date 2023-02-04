@@ -33,6 +33,7 @@ routes.get("/api/posyandu/kader/:id", passport_1.default.authenticate("jwt", { s
 routes.get("/api/posyandu", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.getAll);
 routes.get("/api/berita", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.getAll);
 routes.get("/api/rapor/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getRaporByAnakId);
+routes.get("/api/rapor/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getRaporById);
 //Post
 routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);
