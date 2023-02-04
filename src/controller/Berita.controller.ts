@@ -48,7 +48,7 @@ export default {
                 console.log("file stobject", req.file)
                 const uploadRes = await uploadToS3(s3, req.file);
                 await Berita.findByIdAndUpdate(req.params.id, {
-                    image: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
+                    photo: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
                 })
             }
             const update = await Berita.findByIdAndUpdate(req.params.id, req.body)
