@@ -94,10 +94,10 @@ exports.default = {
             try {
                 const posyandu = yield User.find({ posyandu: req.params.id, roles: "kader" });
                 ;
-                return res.status(200).json({ msg: `Get list orang tua`, kader: posyandu });
+                return res.status(200).json({ msg: `Get list kader`, kader: posyandu });
             }
             catch (e) {
-                return res.status(400).json({ msg: `Get list orang tua Failed`, error: e });
+                return res.status(400).json({ msg: `Get list kader Failed`, error: e });
             }
         });
     }
