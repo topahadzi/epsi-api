@@ -20,6 +20,10 @@ exports.default = {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const searchRapor = yield Rapor.find({ name: req.body.name, anak: req.body.anak });
+                if (searchRapor) {
+                    return res.status(400).json({ msg: "Rapor Sudah Ada" });
+                }
                 const rapor = Object.assign(Object.assign({}, req.body), { umur: "12", imunisasi: {
                         hepatitis_b: req.body.hepatitis_b,
                         polio: req.body.polio,
@@ -45,5 +49,24 @@ exports.default = {
             }
         });
     },
+    getRaporByAnakId(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const rapor = yield Rapor.find({ anak: req.params.id });
+                return res.status(200).json({ msg: `Get Rapor By Anak Id`, rapor: rapor });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get Rapor By Anak Id Failed`, error: e });
+            }
+        });
+    },
+    // async getAll(req: Request, res: Response) {
+    //     try {
+    //         const berita = await Berita.find().sort({createdAt: -1});;
+    //         return res.status(200).json({msg: `Get All Berita`, berita: berita})
+    //     } catch (e) {
+    //         return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
+    //     }
+    // },
 };
 //# sourceMappingURL=Rapor.controller.js.map

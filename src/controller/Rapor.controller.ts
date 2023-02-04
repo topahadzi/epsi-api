@@ -9,6 +9,10 @@ const Rapor = mongoose.model("Rapor")
 export default {
     async create(req: Request, res: Response) {
         try {
+            const searchRapor = await Rapor.find({ name: req.body.name, anak: req.body.anak });
+            if (searchRapor) {
+                return res.status(400).json({ msg: "Rapor Sudah Ada" });
+            }
             const rapor = {
                 ...req.body,
                 umur: "12",
@@ -37,4 +41,20 @@ export default {
             return res.status(400).json({ msg: `error create rapor`, error: e })
         }
     },
+    async getRaporByAnakId(req: Request, res: Response) {
+        try {
+            const rapor = await Rapor.find({ anak: req.params.id });
+            return res.status(200).json({msg: `Get Rapor By Anak Id`, rapor: rapor})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get Rapor By Anak Id Failed`, error: e })
+        }
+    },
+    // async getAll(req: Request, res: Response) {
+    //     try {
+    //         const berita = await Berita.find().sort({createdAt: -1});;
+    //         return res.status(200).json({msg: `Get All Berita`, berita: berita})
+    //     } catch (e) {
+    //         return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
+    //     }
+    // },
 }

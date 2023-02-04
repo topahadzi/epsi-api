@@ -80,10 +80,11 @@ const RaporSchema = new Schema({
             default: false,
         }
     }],
-    anak: [{
+    anak: {
         type: Schema.Types.ObjectId,
-        ref: "Anak"
-    }],
+        ref: "Anak",
+        required: true
+    },
 });
 const Rapor = model<IRapor>("Rapor", RaporSchema);
 export default Rapor;

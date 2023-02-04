@@ -76,10 +76,11 @@ const RaporSchema = new mongoose_1.Schema({
                 default: false,
             }
         }],
-    anak: [{
-            type: mongoose_1.Schema.Types.ObjectId,
-            ref: "Anak"
-        }],
+    anak: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "Anak",
+        required: true
+    },
 });
 const Rapor = (0, mongoose_1.model)("Rapor", RaporSchema);
 exports.default = Rapor;

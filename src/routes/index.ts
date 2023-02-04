@@ -29,6 +29,7 @@ routes.get("/api/posyandu/orangtua/:id", passport.authenticate("jwt", { session:
 routes.get("/api/posyandu/kader/:id", passport.authenticate("jwt", { session: false }), PosyanduController.getKader)
 routes.get("/api/posyandu", passport.authenticate("jwt", { session: false }), PosyanduController.getAll)
 routes.get("/api/berita", passport.authenticate("jwt", { session: false }), BeritaController.getAll)
+routes.get("/api/rapor/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporByAnakId)
 
 //Post
 routes.post("/api/signin", UserController.signin)
