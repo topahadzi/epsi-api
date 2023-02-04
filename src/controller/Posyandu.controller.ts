@@ -27,12 +27,27 @@ export default {
             return res.status(400).json({ msg: `error create posyandu`, error: e })
         }
     },
+    async update(req: Request, res: Response) {
+        try {
+            const posyandu = await Posyandu.findById(req.params.id);
+            if (!posyandu) {
+                return res.status(400).json({ msg: "Posyandu tidak Ada" });
+            }
+
+            const updateposyandu = await Posyandu.findByIdAndUpdate(req.params.id, req.body)
+
+            return res.status(200).json({ msg: `Success Update`, posyandu: updateposyandu});
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json({ msg: `Update Posyandu Failed`, error: e })
+        }
+    },
     async getAll(req: Request, res: Response) {
         try {
             const posyandu = await Posyandu.find();
             return res.status(200).json({msg: `Get Posyandu`, Posyandu: posyandu})
         } catch (e) {
-            return res.status(400).json({ msg: `Get Posyandu Failed`, error: e })
+            return res.status(400).json({ msg: `Get Posyandu Fai    led`, error: e })
         }
     },
     async getPosyanduById(req: Request, res: Response) {

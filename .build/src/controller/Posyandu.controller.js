@@ -39,6 +39,22 @@ exports.default = {
             }
         });
     },
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const posyandu = yield Posyandu.findById(req.params.id);
+                if (!posyandu) {
+                    return res.status(400).json({ msg: "Posyandu tidak Ada" });
+                }
+                const updateposyandu = yield Posyandu.findByIdAndUpdate(req.params.id, req.body);
+                return res.status(200).json({ msg: `Success Update`, posyandu: updateposyandu });
+            }
+            catch (e) {
+                console.log(e);
+                return res.status(400).json({ msg: `Update Posyandu Failed`, error: e });
+            }
+        });
+    },
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -46,7 +62,7 @@ exports.default = {
                 return res.status(200).json({ msg: `Get Posyandu`, Posyandu: posyandu });
             }
             catch (e) {
-                return res.status(400).json({ msg: `Get Posyandu Failed`, error: e });
+                return res.status(400).json({ msg: `Get Posyandu Fai    led`, error: e });
             }
         });
     },

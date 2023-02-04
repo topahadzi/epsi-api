@@ -39,6 +39,8 @@ routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);
 routes.post("/api/user/update/:id", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.updateUser);
 routes.post("/api/anak/update/:id", passport_1.default.authenticate("jwt", { session: false }), Anak_controller_1.default.updateAnak);
+routes.post("/api/posyandu/update/:id", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.update);
+routes.post("/api/rapor/update/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.update);
 routes.post("/api/anak/create", passport_1.default.authenticate("jwt", { session: false }), Anak_controller_1.default.create);
 routes.post("/api/posyandu/create", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.create);
 routes.post("/api/berita/create", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.create);

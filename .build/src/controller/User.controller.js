@@ -22,7 +22,6 @@ const aws_sdk_1 = require("aws-sdk");
 const requireDir = require('require-dir');
 requireDir('../models');
 const User = mongoose_1.default.model("User");
-const Posyandu = mongoose_1.default.model("Posyandu");
 exports.default = {
     signin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -97,11 +96,6 @@ exports.default = {
                     });
                 }
                 const updateuser = yield User.findByIdAndUpdate(req.params.id, req.body);
-                if (req.body.posyandu) {
-                    yield Posyandu.findByIdAndUpdate(req.body.posyandu, {
-                        $push: { user: req.params.id }
-                    });
-                }
                 return res.status(200).json({ msg: `Success Update`, user: updateuser });
             }
             catch (e) {

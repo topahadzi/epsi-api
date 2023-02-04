@@ -12,7 +12,6 @@ requireDir('../models');
 
 
 const User = mongoose.model("User")
-const Posyandu = mongoose.model("Posyandu")
 
 export default {
     async signin(req: Request, res: Response) {
@@ -83,12 +82,6 @@ export default {
                 })
             }
             const updateuser = await User.findByIdAndUpdate(req.params.id, req.body)
-
-            if (req.body.posyandu){
-                await Posyandu.findByIdAndUpdate(req.body.posyandu, {
-                    $push: { user: req.params.id } 
-                })
-            }
             return res.status(200).json({ msg: `Success Update`, user: updateuser});
         } catch (e) {
             console.log(e)

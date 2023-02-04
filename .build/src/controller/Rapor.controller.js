@@ -49,6 +49,22 @@ exports.default = {
             }
         });
     },
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const rapor = yield Rapor.findById(req.params.id);
+                if (!rapor) {
+                    return res.status(400).json({ msg: "Rapor tidak Ada" });
+                }
+                const updaterapor = yield Rapor.findByIdAndUpdate(req.params.id, req.body);
+                return res.status(200).json({ msg: `Success Update`, rapor: updaterapor });
+            }
+            catch (e) {
+                console.log(e);
+                return res.status(400).json({ msg: `Update Rapor Failed`, error: e });
+            }
+        });
+    },
     getRaporByAnakId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

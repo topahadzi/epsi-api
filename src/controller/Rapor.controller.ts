@@ -41,6 +41,21 @@ export default {
             return res.status(400).json({ msg: `error create rapor`, error: e })
         }
     },
+    async update(req: Request, res: Response) {
+        try {
+            const rapor = await Rapor.findById(req.params.id);
+            if (!rapor) {
+                return res.status(400).json({ msg: "Rapor tidak Ada" });
+            }
+
+            const updaterapor = await Rapor.findByIdAndUpdate(req.params.id, req.body)
+
+            return res.status(200).json({ msg: `Success Update`, rapor: updaterapor});
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json({ msg: `Update Rapor Failed`, error: e })
+        }
+    },
     async getRaporByAnakId(req: Request, res: Response) {
         try {
             const rapor = await Rapor.find({ anak: req.params.id });
