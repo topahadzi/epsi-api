@@ -80,7 +80,7 @@ exports.default = {
     getOrangtua(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const posyandu = yield User.find({ posyandu: req.params.id, roles: "orangtua" });
+                const posyandu = yield User.find({ posyandu: req.params.id, roles: "orangtua" }).populate("anak");
                 ;
                 return res.status(200).json({ msg: `Get list orang tua`, orangtua: posyandu });
             }

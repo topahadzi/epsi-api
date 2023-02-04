@@ -60,7 +60,7 @@ export default {
     },
     async getOrangtua(req: Request, res: Response) {
         try {
-            const posyandu = await User.find({ posyandu: req.params.id, roles: "orangtua" });;
+            const posyandu = await User.find({ posyandu: req.params.id, roles: "orangtua" }).populate("anak");;
             return res.status(200).json({msg: `Get list orang tua`, orangtua: posyandu})
         } catch (e) {
             return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
