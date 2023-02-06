@@ -21,11 +21,10 @@ exports.default = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const searchRapor = yield Rapor.find({ name: req.body.name, anak: req.body.anak });
-                console.log(searchRapor);
                 if (searchRapor.length != 0) {
                     return res.status(400).json({ msg: "Rapor Sudah Ada" });
                 }
-                const rapor = Object.assign(Object.assign({}, req.body), { umur: "12", imunisasi: {
+                const rapor = Object.assign(Object.assign({}, req.body), { imunisasi: {
                         hepatitis_b: req.body.hepatitis_b,
                         polio: req.body.polio,
                         bcg: req.body.bcg,

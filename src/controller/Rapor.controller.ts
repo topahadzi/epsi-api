@@ -15,7 +15,6 @@ export default {
             }
             const rapor = {
                 ...req.body,
-                umur: "12",
                 imunisasi: {
                     hepatitis_b: req.body.hepatitis_b,
                     polio: req.body.polio,

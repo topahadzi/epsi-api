@@ -22,6 +22,10 @@ const RaporSchema = new Schema({
         type: String,
         required: true
     },
+    bulan: {
+        type: Number,
+        required: true
+    },
     imunisasi: [{
         hepatitis_b: {
             type: Boolean,

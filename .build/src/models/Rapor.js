@@ -18,6 +18,10 @@ const RaporSchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
+    bulan: {
+        type: Number,
+        required: true
+    },
     imunisasi: [{
             hepatitis_b: {
                 type: Boolean,
