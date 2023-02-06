@@ -71,6 +71,22 @@ export default {
             return res.status(400).json({ msg: `Get Rapor By Id Failed`, error: e })
         }
     },
+    async getDataGrafikTinggi(req: Request, res: Response) {
+        try {
+            const rapor = await Rapor.find({ anak: req.params.id }).select({ "tinggi_badan": 1, "bulan": 2, '_id': 0});
+            return res.status(200).json({msg: `Get Grafik Tinggi Anak`, rapor: rapor})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get Grafik Tinggi Anak Failed`, error: e })
+        }
+    },
+    async getDataGrafikBerat(req: Request, res: Response) {
+        try {
+            const rapor = await Rapor.find({ anak: req.params.id }).select({ "berat_badan": 1, "bulan": 2, '_id': 0});
+            return res.status(200).json({msg: `Get Grafik Berat Anak`, rapor: rapor})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get Grafik Berat Anak Failed`, error: e })
+        }
+    },
     // async getAll(req: Request, res: Response) {
     //     try {
     //         const berita = await Berita.find().sort({createdAt: -1});;

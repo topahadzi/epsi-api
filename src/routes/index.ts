@@ -31,6 +31,8 @@ routes.get("/api/posyandu", passport.authenticate("jwt", { session: false }), Po
 routes.get("/api/berita", passport.authenticate("jwt", { session: false }), BeritaController.getAll)
 routes.get("/api/rapor/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporByAnakId)
 routes.get("/api/rapor/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporById)
+routes.get("/api/rapor/tinggi/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikTinggi)
+routes.get("/api/rapor/berat/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikBerat)
 
 //Post
 routes.post("/api/signin", UserController.signin)

@@ -34,6 +34,8 @@ routes.get("/api/posyandu", passport_1.default.authenticate("jwt", { session: fa
 routes.get("/api/berita", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.getAll);
 routes.get("/api/rapor/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getRaporByAnakId);
 routes.get("/api/rapor/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getRaporById);
+routes.get("/api/rapor/tinggi/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikTinggi);
+routes.get("/api/rapor/berat/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikBerat);
 //Post
 routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);

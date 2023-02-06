@@ -1,7 +1,8 @@
 import { Document, Schema, model } from 'mongoose';
 
 export interface IRapor extends Document {
-
+    tinggi_badan: Number,
+    bulan: Number
 
 }
 

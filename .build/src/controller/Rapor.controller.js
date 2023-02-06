@@ -87,6 +87,28 @@ exports.default = {
             }
         });
     },
+    getDataGrafikTinggi(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const rapor = yield Rapor.find({ anak: req.params.id }).select({ "tinggi_badan": 1, "bulan": 2, '_id': 0 });
+                return res.status(200).json({ msg: `Get Grafik Tinggi Anak`, rapor: rapor });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get Grafik Tinggi Anak Failed`, error: e });
+            }
+        });
+    },
+    getDataGrafikBerat(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const rapor = yield Rapor.find({ anak: req.params.id }).select({ "berat_badan": 1, "bulan": 2, '_id': 0 });
+                return res.status(200).json({ msg: `Get Grafik Berat Anak`, rapor: rapor });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get Grafik Berat Anak Failed`, error: e });
+            }
+        });
+    },
     // async getAll(req: Request, res: Response) {
     //     try {
     //         const berita = await Berita.find().sort({createdAt: -1});;
