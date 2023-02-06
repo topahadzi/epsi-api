@@ -32,7 +32,6 @@ export default {
                     dengue: req.body.dengue
                 }
             }
-            console.log(rapor)
 
             const createRapor = await Rapor.create(rapor)
             return res.status(200).json({ msg: `Success Rapor`, rapor: createRapor });
@@ -46,8 +45,26 @@ export default {
             if (!rapor) {
                 return res.status(400).json({ msg: "Rapor tidak Ada" });
             }
-
-            const updaterapor = await Rapor.findByIdAndUpdate(req.params.id, req.body)
+            const rapordata = {
+                ...req.body,
+                imunisasi: {
+                    hepatitis_b: req.body.hepatitis_b,
+                    polio: req.body.polio,
+                    bcg: req.body.bcg,
+                    dtp: req.body.dtp,
+                    hib: req.body.hib,
+                    pcv: req.body.pcv,
+                    rotavirus: req.body.rotavirus,
+                    influenza: req.body.influenza,
+                    mr: req.body.mr,
+                    je: req.body.je,
+                    varisela: req.body.varisela,
+                    hepatitis_a: req.body.hepatitis_a,
+                    tifoid: req.body.tifoid,
+                    dengue: req.body.dengue
+                }
+            }
+            const updaterapor = await Rapor.findByIdAndUpdate(req.params.id, rapordata)
 
             return res.status(200).json({ msg: `Success Update`, rapor: updaterapor});
         } catch (e) {
