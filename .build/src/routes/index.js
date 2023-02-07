@@ -36,6 +36,7 @@ routes.get("/api/rapor/anak/:id", passport_1.default.authenticate("jwt", { sessi
 routes.get("/api/rapor/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getRaporById);
 routes.get("/api/rapor/tinggi/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikTinggi);
 routes.get("/api/rapor/berat/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikBerat);
+routes.get("/api/user", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.getAll);
 //Post
 routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);
@@ -49,4 +50,6 @@ routes.post("/api/berita/create", passport_1.default.authenticate("jwt", { sessi
 routes.post("/api/rapor/create", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.create);
 routes.post("/api/berita/update/:id", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.update);
 routes.delete("/api/berita/:id", passport_1.default.authenticate("jwt", { session: false }), Berita_controller_1.default.delete);
+routes.delete("/api/user/:id", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.delete);
+routes.delete("/api/posyandu/:id", passport_1.default.authenticate("jwt", { session: false }), Posyandu_controller_1.default.delete);
 //# sourceMappingURL=index.js.map

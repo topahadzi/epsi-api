@@ -115,14 +115,28 @@ exports.default = {
                 return res.status(400).json({ msg: `Get User By Id Failed`, error: e });
             }
         });
+    },
+    getAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield User.find();
+                return res.status(200).json({ msg: `Get All User`, user: user });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get All User Failed`, error: e });
+            }
+        });
+    },
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const user = yield User.deleteOne({ _id: req.params.id });
+                return res.status(200).json({ msg: `Delete User Success`, user: user });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Delete User Failed`, error: e });
+            }
+        });
     }
-    // async getAll(req: Request, res: Response) {
-    //     try {
-    //         const createUser = await (await User.find()).length
-    //         return res.status(200).json({msg: `All Works`, SizeOfDataBase: `${createUser} Pessoas Cadastradas`})
-    //     } catch (e) {
-    //         return res.status(400).json({ msg: `All Failed`, error: e })
-    //     }
-    // }
 };
 //# sourceMappingURL=User.controller.js.map

@@ -13,7 +13,7 @@ const PosyanduSchema = new Schema({
         type: String,
         required: true,
     },
-    gambar: {
+    photo: {
         type: String,
     },
 });

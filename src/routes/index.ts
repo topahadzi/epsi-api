@@ -33,6 +33,7 @@ routes.get("/api/rapor/anak/:id", passport.authenticate("jwt", { session: false 
 routes.get("/api/rapor/:id", passport.authenticate("jwt", { session: false }), RaporController.getRaporById)
 routes.get("/api/rapor/tinggi/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikTinggi)
 routes.get("/api/rapor/berat/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikBerat)
+routes.get("/api/user", passport.authenticate("jwt", { session: false }), UserController.getAll)
 
 //Post
 routes.post("/api/signin", UserController.signin)
@@ -48,4 +49,6 @@ routes.post("/api/rapor/create", passport.authenticate("jwt", { session: false }
 routes.post("/api/berita/update/:id", passport.authenticate("jwt", { session: false }), BeritaController.update)
 
 routes.delete("/api/berita/:id", passport.authenticate("jwt", { session: false }), BeritaController.delete)
+routes.delete("/api/user/:id", passport.authenticate("jwt", { session: false }), UserController.delete)
+routes.delete("/api/posyandu/:id", passport.authenticate("jwt", { session: false }), PosyanduController.delete)
 export {routes};

@@ -10,7 +10,7 @@ const PosyanduSchema = new mongoose_1.Schema({
         type: String,
         required: true,
     },
-    gambar: {
+    photo: {
         type: String,
     },
 });

@@ -1,5 +1,8 @@
 import { Request, Response } from 'express'
 import mongoose from 'mongoose'
+import config from "../config/config";
+import { S3 } from 'aws-sdk';
+import { uploadToS3 } from "../services/uploadToS3";
 const requireDir = require('require-dir')
 requireDir('../models');
 
@@ -10,19 +13,22 @@ const User = mongoose.model("User")
 export default {
     async create(req: Request, res: Response) {
         try {
-            const newposyandu = new Posyandu({
-                name: req.body.name,
-                alamat: req.body.alamat,
-                gambar: req.body.gambar,
-            })
-            const posyandu = await Posyandu.findOne({ name: req.body.name });
-            console.log(posyandu)
-            if (posyandu) {
-                return res.status(400).json({ msg: "Posyandu Sudah Ada" });
-            }
-            const createPosyandu = await newposyandu.save()
-            return res.status(200).json({ msg: `Success Posyandu`, posyandu: createPosyandu });
-                
+            if(req.file){
+                const s3 = new S3({
+                    accessKeyId: config.aws_access_key_id,
+                    secretAccessKey: config.aws_secret_access_key,
+                });
+                console.log("file stobject", req.file)
+                const uploadRes = await uploadToS3(s3, req.file);
+                const createPosyandu = await Posyandu.create(req.body)
+                const updatePosyandu = await Posyandu.findByIdAndUpdate(createPosyandu.id, {
+                    photo: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
+                })
+                return res.status(200).json({ msg: `Success Create Posyandu`, posyandu: updatePosyandu });
+            } else {
+                const createPosyandu = await Posyandu.create(req.body)
+                return res.status(200).json({ msg: `Success Create Posyandu`, posyandu: createPosyandu });
+            }   
         } catch (e) {
             return res.status(400).json({ msg: `error create posyandu`, error: e })
         }
@@ -33,7 +39,17 @@ export default {
             if (!posyandu) {
                 return res.status(400).json({ msg: "Posyandu tidak Ada" });
             }
-
+            if(req.file){
+                const s3 = new S3({
+                    accessKeyId: config.aws_access_key_id,
+                    secretAccessKey: config.aws_secret_access_key,
+                });
+                console.log("file stobject", req.file)
+                const uploadRes = await uploadToS3(s3, req.file);
+                await Posyandu.findByIdAndUpdate(req.params.id, {
+                    photo: "https://d1x1dyl0o67nta.cloudfront.net/" + String(uploadRes.data)
+                })
+            }
             const updateposyandu = await Posyandu.findByIdAndUpdate(req.params.id, req.body)
 
             return res.status(200).json({ msg: `Success Update`, posyandu: updateposyandu});
@@ -47,7 +63,7 @@ export default {
             const posyandu = await Posyandu.find();
             return res.status(200).json({msg: `Get Posyandu`, posyandu: posyandu})
         } catch (e) {
-            return res.status(400).json({ msg: `Get Posyandu Fai    led`, error: e })
+            return res.status(400).json({ msg: `Get Posyandu Failed`, error: e })
         }
     },
     async getPosyanduById(req: Request, res: Response) {
@@ -72,6 +88,14 @@ export default {
             return res.status(200).json({msg: `Get list kader`, kader: posyandu})
         } catch (e) {
             return res.status(400).json({ msg: `Get list kader Failed`, error: e })
+        }
+    },
+    async delete(req: Request, res: Response){
+        try {
+            const posyandu = await Posyandu.deleteOne({ _id: req.params.id});
+            return res.status(200).json({msg: `Delete Posyandu Success`, posyandu: posyandu})
+        } catch (e) {
+            return res.status(400).json({ msg: `Delete Posyandu Failed`, error: e })
         }
     }
 }
