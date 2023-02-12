@@ -34,6 +34,7 @@ routes.get("/api/rapor/:id", passport.authenticate("jwt", { session: false }), R
 routes.get("/api/rapor/tinggi/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikTinggi)
 routes.get("/api/rapor/berat/anak/:id", passport.authenticate("jwt", { session: false }), RaporController.getDataGrafikBerat)
 routes.get("/api/user", passport.authenticate("jwt", { session: false }), UserController.getAll)
+routes.get("/api/user/grafik/:id", passport.authenticate("jwt", { session: false }), UserController.getGrafikByUser)
 
 //Post
 routes.post("/api/signin", UserController.signin)

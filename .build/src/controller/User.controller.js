@@ -22,6 +22,8 @@ const aws_sdk_1 = require("aws-sdk");
 const requireDir = require('require-dir');
 requireDir('../models');
 const User = mongoose_1.default.model("User");
+const Rapor = mongoose_1.default.model("Rapor");
+const Anak = mongoose_1.default.model("Anak");
 exports.default = {
     signin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -113,6 +115,33 @@ exports.default = {
             }
             catch (e) {
                 return res.status(400).json({ msg: `Get User By Id Failed`, error: e });
+            }
+        });
+    },
+    getGrafikByUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                console.log(req.params.id);
+                const user = yield User.findById(req.params.id);
+                let grafik = [];
+                console.log(user.anak);
+                for (let anak in user.anak) {
+                    let anakObj = user.anak[anak];
+                    let anakid = anakObj.toString();
+                    console.log(anakid);
+                    const anak_name = yield Anak.find({ _id: anakid }, { _id: 0, name: 1 });
+                    const name = anak_name[0].name;
+                    const rapor = yield Rapor.find({ anak: anakid });
+                    const response = {
+                        anak: name,
+                        rapor
+                    };
+                    grafik.push(response);
+                }
+                return res.status(200).json({ msg: `Get Grafik`, Grafik: grafik });
+            }
+            catch (e) {
+                return res.status(400).json({ msg: `Get Grafik Failed`, error: e });
             }
         });
     },

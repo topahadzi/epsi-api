@@ -12,6 +12,8 @@ requireDir('../models');
 
 
 const User = mongoose.model("User")
+const Rapor = mongoose.model("Rapor")
+const Anak = mongoose.model("Anak")
 
 export default {
     async signin(req: Request, res: Response) {
@@ -95,6 +97,29 @@ export default {
             return res.status(200).json({msg: `Get User`, user: user})
         } catch (e) {
             return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
+        }
+    },
+    async getGrafikByUser(req: Request, res: Response) {
+        try {
+            console.log(req.params.id)
+            const user = await User.findById(req.params.id)
+            let grafik = [];
+            for (let anak in user.anak) {
+                let anakObj = user.anak[anak]
+                let anakid = anakObj.toString()
+                const anak_name = await Anak.find({ _id: anakid}, { _id: 0, name: 1})
+                const name = anak_name[0].name;
+                const rapor = await Rapor.find({ anak: anakid })
+
+                const response = {
+                    anak: name,
+                    rapor
+                }
+                grafik.push(response)
+            }
+            return res.status(200).json({msg: `Get Grafik`, Grafik: grafik})
+        } catch (e) {
+            return res.status(400).json({ msg: `Get Grafik Failed`, error: e })
         }
     },
     async getAll(req: Request, res: Response) {

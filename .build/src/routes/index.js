@@ -37,6 +37,7 @@ routes.get("/api/rapor/:id", passport_1.default.authenticate("jwt", { session: f
 routes.get("/api/rapor/tinggi/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikTinggi);
 routes.get("/api/rapor/berat/anak/:id", passport_1.default.authenticate("jwt", { session: false }), Rapor_controller_1.default.getDataGrafikBerat);
 routes.get("/api/user", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.getAll);
+routes.get("/api/user/grafik/:id", passport_1.default.authenticate("jwt", { session: false }), User_controller_1.default.getGrafikByUser);
 //Post
 routes.post("/api/signin", User_controller_1.default.signin);
 routes.post("/api/signup", User_controller_1.default.signup);
