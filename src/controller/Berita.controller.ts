@@ -9,7 +9,7 @@ requireDir('../models');
 
 const Berita = mongoose.model("Berita")
 
-export default {
+export class BeritaClass {
     async create(req: Request, res: Response) {
         try {
             console.log(req.body)
@@ -33,7 +33,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `error create berita`, error: e })
         }
-    },
+    }
     async update(req: Request, res: Response) {
         try {
             const berita = await Berita.findById(req.params.id);
@@ -57,7 +57,7 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Update Berita Failed`, error: e })
         }
-    },
+    }
     async getBeritaById(req: Request, res: Response) {
         try {
             const berita = await Berita.findById(req.params.id);
@@ -65,7 +65,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Berita By Id Failed`, error: e })
         }
-    },
+    }
     async getAll(req: Request, res: Response) {
         try {
             const berita = await Berita.find().sort({createdAt: -1});;
@@ -73,7 +73,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
         }
-    },
+    }
     async delete(req: Request, res: Response){
         try {
             const berita = await Berita.deleteOne({ _id: req.params.id});

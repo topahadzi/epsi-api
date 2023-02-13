@@ -10,7 +10,7 @@ const Posyandu = mongoose.model("Posyandu")
 const User = mongoose.model("User")
 
 
-export default {
+export class PosyanduClass {
     async create(req: Request, res: Response) {
         try {
             if(req.file){
@@ -32,7 +32,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `error create posyandu`, error: e })
         }
-    },
+    }
     async update(req: Request, res: Response) {
         try {
             const posyandu = await Posyandu.findById(req.params.id);
@@ -57,7 +57,7 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Update Posyandu Failed`, error: e })
         }
-    },
+    }
     async getAll(req: Request, res: Response) {
         try {
             const posyandu = await Posyandu.find();
@@ -65,7 +65,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Posyandu Failed`, error: e })
         }
-    },
+    }
     async getPosyanduById(req: Request, res: Response) {
         try {
             const posyandu = await Posyandu.findById(req.params.id);
@@ -73,7 +73,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Posyandu By Id Failed`, error: e })
         }
-    },
+    }
     async getOrangtua(req: Request, res: Response) {
         try {
             const posyandu = await User.find({ posyandu: req.params.id, roles: "orangtua" }).populate("anak");;
@@ -81,7 +81,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get list orang tua Failed`, error: e })
         }
-    },
+    }
     async getKader(req: Request, res: Response) {
         try {
             const posyandu = await User.find({ posyandu: req.params.id, roles: "kader" });;
@@ -89,7 +89,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get list kader Failed`, error: e })
         }
-    },
+    }
     async delete(req: Request, res: Response){
         try {
             const posyandu = await Posyandu.deleteOne({ _id: req.params.id});

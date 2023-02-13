@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+import Anak from '../models/Anak';
+import User from '../models/User';
 const requireDir = require('require-dir')
 requireDir('../models');
 
-const Anak = mongoose.model("Anak")
-const User = mongoose.model("User")
-
-export default {
+export class AnakClass {
+    name: any
     async create(req: Request, res: Response) {
         try {
             const anak = await Anak.findOne({ nik: req.body.nik });
@@ -23,7 +23,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `error create anak`, error: e })
         }
-    },
+    }
     async updateAnak(req: Request, res: Response) {
         try {
             const anak = await Anak.findById(req.params.id);
@@ -36,13 +36,13 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Update Anak Failed`, error: e })
         }
-    },
+    }
     async getAnakById(req: Request, res: Response) {
         try {
             const anak = await Anak.findById(req.params.id);
             return res.status(200).json({msg: `Get Anak`, anak: anak})
         } catch (e) {
-            return res.status(400).json({ msg: `Get Anak By Id Failed`, error: e })
+            return res.status(400).json({ msg: `Anak By Id Failed`, error: e })
         }
     }
 

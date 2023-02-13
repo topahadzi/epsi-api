@@ -6,7 +6,7 @@ requireDir('../models');
 const Rapor = mongoose.model("Rapor")
 
 
-export default {
+export class RaporClass {
     async create(req: Request, res: Response) {
         try {
             const searchRapor = await Rapor.find({ name: req.body.name, anak: req.body.anak });
@@ -38,7 +38,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `error create rapor`, error: e })
         }
-    },
+    }
     async update(req: Request, res: Response) {
         try {
             const rapor = await Rapor.findById(req.params.id);
@@ -71,7 +71,7 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Update Rapor Failed`, error: e })
         }
-    },
+    }
     async getRaporByAnakId(req: Request, res: Response) {
         try {
             const rapor = await Rapor.find({ anak: req.params.id });
@@ -79,7 +79,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Rapor By Anak Id Failed`, error: e })
         }
-    },
+    }
     async getRaporById(req: Request, res: Response) {
         try {
             const rapor = await Rapor.findById(req.params.id);
@@ -87,7 +87,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Rapor By Id Failed`, error: e })
         }
-    },
+    }
     async getDataGrafikTinggi(req: Request, res: Response) {
         try {
             const rapor = await Rapor.find({ anak: req.params.id }).select({ "tinggi_badan": 1, "bulan": 2, '_id': 0}).sort({ bulan: 1});
@@ -95,7 +95,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Grafik Tinggi Anak Failed`, error: e })
         }
-    },
+    }
     async getDataGrafikBerat(req: Request, res: Response) {
         try {
             const rapor = await Rapor.find({ anak: req.params.id }).select({ "berat_badan": 1, "bulan": 2, '_id': 0}).sort({ bulan: 1});
@@ -103,7 +103,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Grafik Berat Anak Failed`, error: e })
         }
-    },
+    }
     // async getAll(req: Request, res: Response) {
     //     try {
     //         const berita = await Berita.find().sort({createdAt: -1});;

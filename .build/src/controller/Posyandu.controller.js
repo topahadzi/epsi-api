@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PosyanduClass = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("../config/config"));
 const aws_sdk_1 = require("aws-sdk");
@@ -20,7 +21,7 @@ const requireDir = require('require-dir');
 requireDir('../models');
 const Posyandu = mongoose_1.default.model("Posyandu");
 const User = mongoose_1.default.model("User");
-exports.default = {
+class PosyanduClass {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -46,7 +47,7 @@ exports.default = {
                 return res.status(400).json({ msg: `error create posyandu`, error: e });
             }
         });
-    },
+    }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -73,7 +74,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Update Posyandu Failed`, error: e });
             }
         });
-    },
+    }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -84,7 +85,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Posyandu Failed`, error: e });
             }
         });
-    },
+    }
     getPosyanduById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -95,7 +96,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Posyandu By Id Failed`, error: e });
             }
         });
-    },
+    }
     getOrangtua(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -107,7 +108,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get list orang tua Failed`, error: e });
             }
         });
-    },
+    }
     getKader(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -119,7 +120,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get list kader Failed`, error: e });
             }
         });
-    },
+    }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -131,5 +132,6 @@ exports.default = {
             }
         });
     }
-};
+}
+exports.PosyanduClass = PosyanduClass;
 //# sourceMappingURL=Posyandu.controller.js.map

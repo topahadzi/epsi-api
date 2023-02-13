@@ -124,11 +124,9 @@ exports.default = {
                 console.log(req.params.id);
                 const user = yield User.findById(req.params.id);
                 let grafik = [];
-                console.log(user.anak);
                 for (let anak in user.anak) {
                     let anakObj = user.anak[anak];
                     let anakid = anakObj.toString();
-                    console.log(anakid);
                     const anak_name = yield Anak.find({ _id: anakid }, { _id: 0, name: 1 });
                     const name = anak_name[0].name;
                     const rapor = yield Rapor.find({ anak: anakid });

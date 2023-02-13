@@ -15,7 +15,7 @@ const User = mongoose.model("User")
 const Rapor = mongoose.model("Rapor")
 const Anak = mongoose.model("Anak")
 
-export default {
+export class UserClass {
     async signin(req: Request, res: Response) {
         try {
             if (!req.body.email || !req.body.password) {
@@ -37,7 +37,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `error login`, error: e })
         }
-    },
+    }
 
     async signup(req: Request, res: Response) {
         try {
@@ -64,7 +64,7 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Signup Failed`, error: e })
         }
-    },
+    }
     async updateUser(req: Request, res: Response) {
         try {
             const user = await User.findById(req.params.id);
@@ -89,7 +89,7 @@ export default {
             console.log(e)
             return res.status(400).json({ msg: `Update User Failed`, error: e })
         }
-    },
+    }
     async getUserById(req: Request, res: Response) {
         try {
             console.log(req.params.id)
@@ -98,7 +98,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get User By Id Failed`, error: e })
         }
-    },
+    }
     async getGrafikByUser(req: Request, res: Response) {
         try {
             console.log(req.params.id)
@@ -121,7 +121,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get Grafik Failed`, error: e })
         }
-    },
+    }
     async getAll(req: Request, res: Response) {
         try {
             const user = await User.find();
@@ -129,7 +129,7 @@ export default {
         } catch (e) {
             return res.status(400).json({ msg: `Get All User Failed`, error: e })
         }
-    },
+    }
     async delete(req: Request, res: Response){
         try {
             const user = await User.deleteOne({ _id: req.params.id});

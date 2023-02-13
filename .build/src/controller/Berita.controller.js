@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.BeritaClass = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("../config/config"));
 const aws_sdk_1 = require("aws-sdk");
@@ -19,7 +20,7 @@ const uploadToS3_1 = require("../services/uploadToS3");
 const requireDir = require('require-dir');
 requireDir('../models');
 const Berita = mongoose_1.default.model("Berita");
-exports.default = {
+class BeritaClass {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -47,7 +48,7 @@ exports.default = {
                 return res.status(400).json({ msg: `error create berita`, error: e });
             }
         });
-    },
+    }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -74,7 +75,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Update Berita Failed`, error: e });
             }
         });
-    },
+    }
     getBeritaById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -85,7 +86,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Berita By Id Failed`, error: e });
             }
         });
-    },
+    }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -97,7 +98,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Berita All Failed`, error: e });
             }
         });
-    },
+    }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -109,5 +110,6 @@ exports.default = {
             }
         });
     }
-};
+}
+exports.BeritaClass = BeritaClass;
 //# sourceMappingURL=Berita.controller.js.map

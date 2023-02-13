@@ -1,13 +1,18 @@
 import express from 'express'
 
-import UserController from '../controller/User.controller';
-import AnakController from '../controller/Anak.controller';
-import PosyanduController from '../controller/Posyandu.controller';
-import BeritaController from '../controller/Berita.controller';
+import {UserClass} from '../controller/User.controller';
+import { AnakClass } from '../controller/Anak.controller';
+import {PosyanduClass} from '../controller/Posyandu.controller';
+import {BeritaClass} from '../controller/Berita.controller';
 import passport from "passport";
-import RaporController from '../controller/Rapor.controller';
+import { RaporClass } from '../controller/Rapor.controller';
 // import multer from 'multer';
 
+const AnakController = new AnakClass();
+const BeritaController = new BeritaClass();
+const PosyanduController = new PosyanduClass();
+const RaporController = new RaporClass();
+const UserController = new UserClass();
 const routes = express.Router();
 // const storage = multer.diskStorage({
 //     destination: "/tmp/uploads"
