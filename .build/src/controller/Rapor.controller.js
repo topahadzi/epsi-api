@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.RaporClass = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const requireDir = require('require-dir');
 requireDir('../models');
 const Rapor = mongoose_1.default.model("Rapor");
-exports.default = {
+class RaporClass {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -47,7 +48,7 @@ exports.default = {
                 return res.status(400).json({ msg: `error create rapor`, error: e });
             }
         });
-    },
+    }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -79,7 +80,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Update Rapor Failed`, error: e });
             }
         });
-    },
+    }
     getRaporByAnakId(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -90,7 +91,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Rapor By Anak Id Failed`, error: e });
             }
         });
-    },
+    }
     getRaporById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -101,7 +102,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Rapor By Id Failed`, error: e });
             }
         });
-    },
+    }
     getDataGrafikTinggi(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -112,7 +113,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Grafik Tinggi Anak Failed`, error: e });
             }
         });
-    },
+    }
     getDataGrafikBerat(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -123,14 +124,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Grafik Berat Anak Failed`, error: e });
             }
         });
-    },
-    // async getAll(req: Request, res: Response) {
-    //     try {
-    //         const berita = await Berita.find().sort({createdAt: -1});;
-    //         return res.status(200).json({msg: `Get All Berita`, berita: berita})
-    //     } catch (e) {
-    //         return res.status(400).json({ msg: `Get Berita All Failed`, error: e })
-    //     }
-    // },
-};
+    }
+}
+exports.RaporClass = RaporClass;
 //# sourceMappingURL=Rapor.controller.js.map

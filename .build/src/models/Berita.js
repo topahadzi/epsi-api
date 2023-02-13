@@ -13,6 +13,11 @@ const BeritaSchema = new mongoose_1.Schema({
     photo: {
         type: String,
     },
+    createdby: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
     createdAt: {
         type: Date,
         default: Date.now,

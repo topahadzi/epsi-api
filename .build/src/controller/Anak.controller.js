@@ -57,9 +57,7 @@ class AnakClass {
     getAnakById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log("masuk");
                 const anak = yield Anak_1.default.findById(req.params.id);
-                console.log(anak);
                 return res.status(200).json({ msg: `Get Anak`, anak: anak });
             }
             catch (e) {

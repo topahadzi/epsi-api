@@ -79,7 +79,7 @@ class BeritaClass {
     getBeritaById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const berita = yield Berita.findById(req.params.id);
+                const berita = yield Berita.findById(req.params.id).populate("createdby", "name");
                 return res.status(200).json({ msg: `Get Berita`, berita: berita });
             }
             catch (e) {

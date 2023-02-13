@@ -60,7 +60,7 @@ export class BeritaClass {
     }
     async getBeritaById(req: Request, res: Response) {
         try {
-            const berita = await Berita.findById(req.params.id);
+            const berita = await Berita.findById(req.params.id).populate("createdby", "name");
             return res.status(200).json({msg: `Get Berita`, berita: berita})
         } catch (e) {
             return res.status(400).json({ msg: `Get Berita By Id Failed`, error: e })

@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserClass = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const generateToken_1 = __importDefault(require("../validators/generateToken"));
@@ -24,7 +25,7 @@ requireDir('../models');
 const User = mongoose_1.default.model("User");
 const Rapor = mongoose_1.default.model("Rapor");
 const Anak = mongoose_1.default.model("Anak");
-exports.default = {
+class UserClass {
     signin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -49,7 +50,7 @@ exports.default = {
                 return res.status(400).json({ msg: `error login`, error: e });
             }
         });
-    },
+    }
     signup(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -78,7 +79,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Signup Failed`, error: e });
             }
         });
-    },
+    }
     updateUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -105,7 +106,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Update User Failed`, error: e });
             }
         });
-    },
+    }
     getUserById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -117,7 +118,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get User By Id Failed`, error: e });
             }
         });
-    },
+    }
     getGrafikByUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -142,7 +143,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get Grafik Failed`, error: e });
             }
         });
-    },
+    }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -153,7 +154,7 @@ exports.default = {
                 return res.status(400).json({ msg: `Get All User Failed`, error: e });
             }
         });
-    },
+    }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -165,5 +166,6 @@ exports.default = {
             }
         });
     }
-};
+}
+exports.UserClass = UserClass;
 //# sourceMappingURL=User.controller.js.map
